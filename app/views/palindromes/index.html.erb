@@ -6,11 +6,27 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<%= form_tag("/palindromes/result", :method => "get",) do %>
+<%= form_tag("/palindromes/", :method => "get",) do %>
  <%= label_tag("from 1 to N:") %>
  <%= text_field_tag(:number) %> <br/>
  <br/>
  <%= submit_tag("Find Palindromes") %>
 <% end %> 
+
+<table class="table">
+    <tr>
+        <th>Порядкорвый номер</th>
+        <th>Число (палиндром)</th>
+        <th>Квадрат числа (палиндром)</th>
+    </tr>
+    <%@result.each_with_index do |cort, index|%>
+    <tr>
+        <td><%= index+1%></td>
+        <td><%= cort[0]%></td>
+        <td><%= cort[1]%></td>
+    </tr>
+    <%end%>
+</table>
+
 </body>
 </html>
