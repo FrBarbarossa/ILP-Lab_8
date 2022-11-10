@@ -1,0 +1,8 @@
+<h1>Hello, Rails!</h1>
+<%= form_tag("/palindromes/result", :method => "get") do %>
+ <%= label_tag("from 1 to N:") %>
+ <%= text_field_tag(:number) %> <br/>
+ <br/>
+ <%= submit_tag("Find Palindromes") %>
+<% end %> 
+
