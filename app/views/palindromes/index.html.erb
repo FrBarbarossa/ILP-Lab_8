@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
 
-<head> 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script>
-
         function submit_form () {
             res_url = "/palindromes.json";
             var number = document.getElementById("number").value;
@@ -21,6 +15,7 @@
                     var my_JSON_object = JSON.parse(response.responseText);
                     var table_head = "<table class=\"table\"><tr><th>Порядкорвый номер</th><th>Число (палиндром)</th><th>Квадрат числа (палиндром)</th></tr>";
                     for (var i = 0; i<my_JSON_object.value.length; i++){
+                        console.log(i);
                         table_head += "<tr>"
                         table_head += "<td>"+ my_JSON_object.value[i][0] +"</td>";
                         table_head += "<td>"+ my_JSON_object.value[i][1] +"</td>";
@@ -34,8 +29,6 @@
                 response.send(null);            
         }
     </script>
-</head>
-<body>
 
 <form class="form" action="">
     <label>From 1 to N:</label>
@@ -46,5 +39,3 @@
 
 <div id="result"></div>
 
-</body>
-</html>
