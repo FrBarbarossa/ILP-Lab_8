@@ -40,7 +40,7 @@ RSpec.describe PalindromesController, type: :controller do
       render_views
 
       it 'has code 200' do
-        get :index, :params => {:format => :json, :number => -100 }
+        get :index, :params => {:format => :json, :number => 100 }
         expect(response.status).to eq(200)
       end
       it 'returns correct json' do
@@ -52,13 +52,15 @@ RSpec.describe PalindromesController, type: :controller do
 end
 
 
-# # Попытка заполнить форму с помощью AJAX #1
+# Попытка заполнить форму с помощью AJAX #1
 # RSpec.feature "Result table management", :type => :feature do
 #   scenario "user pushed correct number" do
+#     Capybara.default_max_wait_time = 5
 #     visit "/"
 #     fill_in "number", with: "10"
 #     click_button ("Find Palindromes")
-#     # expect(page).to have_selector("table tr")
+#     # expect(page).to have_selector("table")
+#     expect(page).to have_text ("Порядковый номер")
 #   end
 # end
 
@@ -75,3 +77,24 @@ end
 #     expect(page).to have_selector("table tr")
 #   end
 # end
+
+
+
+# Попытка заполнить форму с помощью AJAX #3
+RSpec.describe "Result table management attempt №3",:js => true, :type => :system do
+  before do
+    driven_by(:selenium_chrome_headless)
+    Capybara.default_max_wait_time = 5
+  end
+
+  let (:output) {[1, 2, 3, 11, 22]}
+  
+  it "user pushed correct number and table created with correct output" do
+    visit "/"
+    fill_in "number", with: "100"
+    click_button ("Find Palindromes")
+    # expect(page).to have_selector("table tr td")
+    all("table tr td").each_with_index{|val, ind| if (ind - 1) % 3 == 0 then expect(val).to have_text(output[(ind-1)/3]) end}
+  end
+
+end
